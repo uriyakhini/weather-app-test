@@ -5,7 +5,7 @@ class SearchBar extends React.Component {
         return (
             <input placeholder='location'></input>
         );
-    } 
+    }
 }
 
 export default SearchBar;
