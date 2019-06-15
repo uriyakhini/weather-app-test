@@ -1,20 +1,25 @@
+import React from 'react';
+import {mount} from 'enzyme';
+import {expect} from 'chai';
+import App from './App';
 
-import Page from 'react-page-object'
-import React from 'react'
-import App from './App'
+describe('App', () => {
+  let wrapper;
 
-describe('AppSpec', function() {
-  let page
+  beforeEach(() => {
+    wrapper = mount(
+      <App/>,
+      {attachTo: document.createElement('div')}
+    );
+  });
 
-  beforeEach(function() {
-    page = new Page(<App />)
-  })
+  afterEach(() => wrapper.detach());
 
-  afterEach(function() {
-    page.destroy()
-  })
+  it('sets location state on enter', () => {
+    var input = wrapper.find('input');
+    input.simulate('change', {target: {value: 'test'}});
+    input.simulate('keypress', {key: 13});
 
-  it('should pass', function() {
-    expect(page.content()).to.contain('Weather App')
-  })
-})
+    expect(wrapper.state().location).to.equal('test');
+  });
+});
