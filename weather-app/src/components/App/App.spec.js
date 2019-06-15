@@ -15,6 +15,6 @@ describe('AppSpec', function() {
   })
 
   it('should pass', function() {
-    expect(page.content()).to.match(/Welcome to React/)
+    expect(page.content()).to.contain('Weather App')
   })
 })

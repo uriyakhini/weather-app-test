@@ -85,7 +85,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "npm run karma -- --single-run",
-    "karma": "set BABEL_ENV=development; set NODE_ENV=test; node_modules/karma/bin/karma start config/karma.conf.js"
+    "karma": "SET BABEL_ENV=development& SET NODE_ENV=test& karma start config/karma.conf.js"
   },
   "eslintConfig": {
     "extends": "react-app"
