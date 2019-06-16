@@ -19,11 +19,11 @@ class App extends React.Component {
   render () {  
     return (
       <div className="App">
-        <header className="App-header">
+        <header>
           <h2>Weather App</h2>
           <SearchBar onEnter={this.handleLocation}/>
-          <WeatherReport location={this.state.location}/>
-        </header>    
+        </header>
+        <WeatherReport location={this.state.location}/>
       </div>
     );
   }
