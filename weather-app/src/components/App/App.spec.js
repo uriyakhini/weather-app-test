@@ -6,14 +6,12 @@ import App from './App';
 describe('App', () => {
   let wrapper;
 
-  beforeEach(() => {
+  before(() => {
     wrapper = mount(
       <App/>,
       {attachTo: document.createElement('div')}
     );
   });
-
-  afterEach(() => wrapper.detach());
 
   it('sets location state on enter', () => {
     var input = wrapper.find('input');
@@ -21,5 +19,9 @@ describe('App', () => {
     input.simulate('keypress', {key: 13});
 
     expect(wrapper.state().location).to.equal('test');
+  });
+
+  it('renders weather report', () => {
+    expect(wrapper.find('.location').text()).to.eq('test');
   });
 });
