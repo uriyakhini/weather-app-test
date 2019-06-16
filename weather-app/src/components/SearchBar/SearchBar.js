@@ -10,7 +10,7 @@ class SearchBar extends React.Component {
     }
 
     handleKeyPress(e) {
-        var key = e.key || e.which;
+        var key = e.which || e.key;
         return key === 13 ? this.props.onEnter(this.state.value) : '';   
     }
 

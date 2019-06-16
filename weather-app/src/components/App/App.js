@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import SearchBar from '../SearchBar';
+import WeatherReport from '../WeatherReport';
 
 class App extends React.Component {
   constructor() {
@@ -21,7 +22,8 @@ class App extends React.Component {
         <header className="App-header">
           <h2>Weather App</h2>
           <SearchBar onEnter={this.handleLocation}/>
-        </header>
+          <WeatherReport location={this.state.location}/>
+        </header>    
       </div>
     );
   }
