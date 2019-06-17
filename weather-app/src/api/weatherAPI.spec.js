@@ -49,7 +49,7 @@ describe('WeatherReport', () => {
       });
     });
     let res = await getCurrentWeather('Cairns');
-    expect(res.name).to.be('Cairns');
+    expect(res.name).to.eq('Cairns');
 
     moxios.uninstall();
   });
