@@ -17,7 +17,6 @@ module.exports = function(config) {
 
     // before serving test/loadtests.js to the browser
     preprocessors: {
-      [require.resolve('chai-as-promised')]: ['webpack'],
       [testHelperPath]: [
         // use karma-webpack to preprocess the file via webpack
         'webpack',
@@ -39,10 +38,6 @@ module.exports = function(config) {
       },
       module: {
         rules: [
-          {
-            test: require.resolve('chai-as-promised'),
-            use: 'babel-loader'
-          },
           {
             enforce: 'pre',
             test: /\.(js|jsx)$/,
