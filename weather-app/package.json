@@ -7,6 +7,7 @@
     "@svgr/webpack": "4.1.0",
     "@typescript-eslint/eslint-plugin": "1.6.0",
     "@typescript-eslint/parser": "1.6.0",
+    "axios": "^0.19.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "8.0.5",
@@ -85,7 +86,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "npm run karma -- --single-run",
-    "karma": "set BABEL_ENV=development; set NODE_ENV=test; node_modules/karma/bin/karma start config/karma.conf.js"
+    "karma": "SET BABEL_ENV=development& SET NODE_ENV=test& karma start config/karma.conf.js"
   },
   "eslintConfig": {
     "extends": "react-app"
