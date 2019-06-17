@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getCurrentWeather from '../../api/weatherAPI';
+import WeatherCard from '../WeatherCard';
 
 class WeatherReport extends React.Component {
     static propTypes = {
         location: PropTypes.string
+    }
+
+    constructor(){
+        super();
+        this.state = {
+            data: ''
+        }
     }
 
     async componentDidMount() {
@@ -22,9 +30,7 @@ class WeatherReport extends React.Component {
     render() {
         return (
             <div className='weather-report'>
-                <div className='location'>
-                    {this.props.location}
-                </div>
+                {this.state.data ? <WeatherCard data={this.state.data}/> : ''}
             </div>
         );
     }

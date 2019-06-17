@@ -22,6 +22,6 @@ describe('App', () => {
   });
 
   it('renders weather report', () => {
-    expect(wrapper.find('.location').text()).to.eq('test');
+    expect(wrapper.find('.weather-report').length).to.eq(1);
   });
 });
