@@ -13,14 +13,6 @@ describe('App', () => {
     );
   });
 
-  it('sets location state on enter', () => {
-    var input = wrapper.find('input');
-    input.simulate('change', {target: {value: 'test'}});
-    input.simulate('keypress', {key: 13});
-
-    expect(wrapper.state().location).to.equal('test');
-  });
-
   it('renders weather report', () => {
     expect(wrapper.find('.weather-report').length).to.eq(1);
   });
