@@ -9,6 +9,10 @@ class WeatherCard extends React.Component {
     render() {
         return (
             <div className='weather-card'>
+                <ul>
+                    <li>Temperture: {this.props.data.main.temp}</li>
+                    <li>Humidity: {this.props.data.main.humidity}</li>
+                </ul>
             </div>
         );
     }
