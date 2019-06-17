@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// Openweathermap api key.
-const API_KEY = '614e59b8b1d6d7d42b026b278ac63500';
+import API_KEYS from '../api-keys.conf';
 
 // Data renew interval, 10 minutes in milliseconds, the update rate of 
 // openweathermap.
@@ -9,6 +8,11 @@ const RESEND_INTERVAL = 600000;
 
 function cacheResponse(location, data, date){
     let cache = getCachedResponses();
+    let cachedIndex = cache.map(response => response.location).indexOf(location);
+
+    if (cachedIndex !== -1) {
+        cache.splice(cachedIndex, 1);
+    }
     cache.push({location, data, date});
     localStorage.setItem('weatherCache', JSON.stringify(cache));
 }
@@ -22,8 +26,6 @@ function getCachedResponses(){
     } catch (e) {
         // This means the cache is empty.
     }
-
-
     return Array.isArray(cache) ? cache : [];
 }
 
@@ -41,7 +43,7 @@ function getCachedResponse(location){
 }
 
 function getCurrentWeather(location, forceUpdate) {
-    const getCurrentWeatherUrl = `data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`;
+    const getCurrentWeatherUrl = `data/2.5/weather?q=${location}&appid=${API_KEYS.openWeatherMap}&units=metric`;
     const baseUrl = 'https://api.openweathermap.org/';
 
     if (typeof(forceUpdate) === undefined) forceUpdate = false;
@@ -52,8 +54,10 @@ function getCurrentWeather(location, forceUpdate) {
         // Check if there is cached data for the requested location. 
         if (!forceUpdate) {          
             let cachedResponse = getCachedResponse(location);
+
             if (cachedResponse && now - cachedResponse.date < RESEND_INTERVAL){
                 resolve(cachedResponse.data);
+                return;
             }
         }
 

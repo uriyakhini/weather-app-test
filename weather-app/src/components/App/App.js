@@ -21,7 +21,7 @@ class App extends React.Component {
       <div className="App">
         <header>
           <h2>Weather App</h2>
-          <SearchBar onEnter={this.handleLocation}/>
+          <SearchBar onSubmit={this.handleLocation}/>
         </header>
         {this.state.location !== '' ? <WeatherReport location={this.state.location}/> : ''}
       </div>

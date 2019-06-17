@@ -26,7 +26,7 @@ describe('WeatherCard', () => {
 
   beforeEach(() => {
     wrapper = shallow(
-      <WeatherCard data={FAKE_DATA}/>,
+      <WeatherCard data={FAKE_DATA} location='Cairns'/>,
       {attachTo: document.createElement('div')}
     );
   });

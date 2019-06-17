@@ -22,7 +22,7 @@ class WeatherReport extends React.Component {
 
     async componentWillReceiveProps(nextProps){
         if (this.props.location !== nextProps.location) {
-            var res = await getCurrentWeather(this.props.location);
+            var res = await getCurrentWeather(nextProps.location);
             this.setState({data: res});
         }
     }
@@ -30,7 +30,8 @@ class WeatherReport extends React.Component {
     render() {
         return (
             <div className='weather-report'>
-                {this.state.data ? <WeatherCard data={this.state.data}/> : ''}
+                {this.state.data ? <WeatherCard data={this.state.data}
+                                                location={this.props.location}/> : ''}
             </div>
         );
     }
