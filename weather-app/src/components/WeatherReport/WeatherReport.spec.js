@@ -27,7 +27,7 @@ describe('WeatherReport', () => {
 
   beforeEach(() => {
     wrapper = mount(
-      <WeatherReport location='Tel Aviv'/>,
+      <WeatherReport/>,
       {attachTo: document.createElement('div')}
     );
   });
@@ -40,7 +40,7 @@ describe('WeatherReport', () => {
     expect(wrapper.find('.weather-report').length).to.eq(1);
   })
 
-  it('renders weather card', async function () {
+  it('creates a new card', () => {
     moxios.install(axios);
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
@@ -50,7 +50,7 @@ describe('WeatherReport', () => {
       });
     });
 
-    await wrapper.instance().componentDidMount();
+    await wrapper.instance().addCard('Cairns');;
     expect(wrapper.children().length).to.eq(1);
     moxios.uninstall();
   });
