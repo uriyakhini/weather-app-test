@@ -41,7 +41,7 @@ function getCachedResponse(location){
 }
 
 function getCurrentWeather(location, forceUpdate) {
-    const getCurrentWeatherUrl = `data/2.5/weather?q=${location}&appid=${API_KEY}`;
+    const getCurrentWeatherUrl = `data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`;
     const baseUrl = 'https://api.openweathermap.org/';
 
     if (typeof(forceUpdate) === undefined) forceUpdate = false;
