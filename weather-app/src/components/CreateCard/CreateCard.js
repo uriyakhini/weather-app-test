@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SearchBar from '../SearchBar';
+
 import './CreateCard.css';
 
 class CreateCard extends React.Component {
@@ -11,8 +13,15 @@ class CreateCard extends React.Component {
     }
 
     render() {
+        let mainDivProps = {className: 'create-card'};
+        if (!this.state.active){
+            mainDivProps.onClick = () => {
+                this.setState({active: true});
+            }
+        }
         return (
-            <div className='create-card'>
+            <div {...mainDivProps}>
+                {this.state.active ? <SearchBar/> : ''}
             </div>
         );
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 import {expect} from 'chai';
 
 import CreateCard from './CreateCard';
@@ -26,10 +26,14 @@ describe('CreateCard', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(
+    wrapper = mount(
       <CreateCard/>,
       {attachTo: document.createElement('div')}
     );
+  });
+
+  afterEach(() => {
+    wrapper.detach();
   });
 
   it('renders create card', () => {
