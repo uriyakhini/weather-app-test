@@ -23,7 +23,7 @@ class App extends React.Component {
           <h2>Weather App</h2>
           <SearchBar onEnter={this.handleLocation}/>
         </header>
-        {this.state.location != '' ? <WeatherReport location={this.state.location}/> : ''}
+        {this.state.location !== '' ? <WeatherReport location={this.state.location}/> : ''}
       </div>
     );
   }
