@@ -6,19 +6,19 @@ import API_KEYS from '../api-keys.conf';
 // openweathermap.
 const RESEND_INTERVAL = 600000;
 
-function cacheResponse(location, data, date){
-    let cache = getCachedResponses();
+function cacheResponse(location, data, date, mode){
+    let cache = getCachedResponses(mode);
     let cachedIndex = cache.map(response => response.location).indexOf(location);
 
     if (cachedIndex !== -1) {
         cache.splice(cachedIndex, 1);
     }
     cache.push({location, data, date});
-    localStorage.setItem('weatherCache', JSON.stringify(cache));
+    localStorage.setItem(`${mode}Cache`, JSON.stringify(cache));
 }
 
-function getCachedResponses(){
-    let stringCache = localStorage.getItem('weatherCache');
+function getCachedResponses(mode){
+    let stringCache = localStorage.getItem(`${mode}Cache`);
     let cache = [];
 
     try {
@@ -29,8 +29,8 @@ function getCachedResponses(){
     return Array.isArray(cache) ? cache : [];
 }
 
-function getCachedResponse(location){
-    const cachedResponses = getCachedResponses();
+function getCachedResponse(location, mode){
+    const cachedResponses = getCachedResponses(mode);
     if (cachedResponses) {
         let cachedIndex = cachedResponses.map((response) => response.location).indexOf(location);
         if (cachedIndex !== -1){
@@ -42,18 +42,19 @@ function getCachedResponse(location){
     }
 }
 
-function getCurrentWeather(location, forceUpdate) {
-    const getCurrentWeatherUrl = `data/2.5/weather?q=${location}&appid=${API_KEYS.openWeatherMap}&units=metric`;
-    const baseUrl = 'https://api.openweathermap.org/';
-
+function getWeather(location, mode, forceUpdate) {
+    if (typeof(mode) === undefined) mode = 'weather';
     if (typeof(forceUpdate) === undefined) forceUpdate = false;
+
+    const getCurrentWeatherUrl = `data/2.5/${mode}?q=${location}&appid=${API_KEYS.openWeatherMap}&units=metric`;
+    const baseUrl = 'https://api.openweathermap.org/';
 
     return new Promise(function (resolve, reject) {
         let now = Date.now();
 
         // Check if there is cached data for the requested location. 
         if (!forceUpdate) {          
-            let cachedResponse = getCachedResponse(location);
+            let cachedResponse = getCachedResponse(location, mode);
 
             if (cachedResponse && now - cachedResponse.date < RESEND_INTERVAL){
                 resolve(cachedResponse.data);
@@ -70,7 +71,7 @@ function getCurrentWeather(location, forceUpdate) {
         .then(res => res.data)
         .then(res => {
             if (resolve) {
-                cacheResponse(location, res, Date.now());
+                cacheResponse(location, res, Date.now(), mode);
                 resolve(res);
             }
             else {
@@ -80,4 +81,4 @@ function getCurrentWeather(location, forceUpdate) {
     });
 }
 
-export default getCurrentWeather;
+export default getWeather;

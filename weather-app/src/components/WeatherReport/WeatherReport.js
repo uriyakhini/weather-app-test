@@ -1,6 +1,6 @@
 import React from 'react';
 
-import getCurrentWeather from '../../api/weatherAPI';
+import getWeather from '../../api/weatherAPI';
 import WeatherCard from '../WeatherCard';
 import CreateCard from '../CreateCard';
 
@@ -19,7 +19,7 @@ class WeatherReport extends React.Component {
             return {err: 'Card already exists!'}
         }
         
-        var data = await getCurrentWeather(location);
+        var data = await getWeather(location);
         let newCards = this.state.cards.slice();
         newCards.push({location, data});
         this.setState({cards: newCards});
