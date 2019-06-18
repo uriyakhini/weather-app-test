@@ -40,7 +40,7 @@ describe('WeatherReport', () => {
     expect(wrapper.find('.weather-report').length).to.eq(1);
   })
 
-  it('creates a new card', () => {
+  it('creates a new card', async () => {
     moxios.install(axios);
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
@@ -50,8 +50,19 @@ describe('WeatherReport', () => {
       });
     });
 
-    await wrapper.instance().addCard('Cairns');;
-    expect(wrapper.children().length).to.eq(1);
+    await wrapper.instance().addCard('Cairns');
+
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: FAKE_DATA
+      });
+    });
+    
+    await wrapper.instance().addCard('Cairo');
+    wrapper.update();
+    expect(wrapper.children().children().length).to.eq(2);
     moxios.uninstall();
   });
 });
