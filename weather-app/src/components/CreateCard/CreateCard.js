@@ -27,7 +27,7 @@ class CreateCard extends React.Component {
         }
         return (
             <div {...mainDivProps}>
-                {this.state.active ? <SearchBar onSubmit={this.handleLocation}/> : ''}
+                {this.state.active ? <SearchBar id="create-card-search" onSubmit={this.handleLocation}/> : ''}
             </div>
         );
     }

@@ -26,7 +26,7 @@ describe('WeatherCard', () => {
 
   beforeEach(() => {
     wrapper = shallow(
-      <WeatherCard data={FAKE_DATA} location='Cairns'/>,
+      <WeatherCard data={FAKE_DATA} tag='Cairns'/>,
       {attachTo: document.createElement('div')}
     );
   });
@@ -36,6 +36,6 @@ describe('WeatherCard', () => {
   })
 
   it('renders weather data', () => {
-    expect(wrapper.find('.weather-card').text()).to.contain('Temperture: 32.1');
+    expect(wrapper.find('.weather-card').text()).to.contain('Temperture: 32');
   });
 });

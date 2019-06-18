@@ -1,11 +1,16 @@
 import React from 'react';
 import Script from 'react-load-script';
+import PropTypes from 'prop-types';
 
 import API_KEYS from '../../api-keys.conf';
 
 const PLACES_API_URL = `https://maps.googleapis.com/maps/api/js?key=${API_KEYS.google}&libraries=places`;
 
 class SearchBar extends React.Component {
+    static propTypes = {
+        id: PropTypes.string
+    }
+
     constructor() {
         super();
         this.handleLoad = this.handleLoad.bind(this);
@@ -16,7 +21,7 @@ class SearchBar extends React.Component {
         /*global google*/
         var options = { types: ['(cities)'] }; 
         this.autocomplete = new google.maps.places.Autocomplete(
-                                document.getElementById('main-search-bar'),
+                                document.getElementById(this.props.id),
                                 options); 
         this.autocomplete.addListener('place_changed',
                                       this.handleLocationSelect);
@@ -46,7 +51,7 @@ class SearchBar extends React.Component {
         return (
             <div>
                 <Script url={PLACES_API_URL} onLoad={this.handleLoad}/>
-                <input id='main-search-bar' placeholder='location'/>
+                <input id={this.props.id} placeholder='location'/>
             </div>
         );
     }
