@@ -7,9 +7,15 @@ import './CreateCard.css';
 class CreateCard extends React.Component {
     constructor() {
         super();
+        this.handleLocation = this.handleLocation.bind(this);
         this.state = {
             active: false
         }
+    }
+
+    handleLocation(location) {
+        this.props.onSubmit(location);
+        this.setState({active: false});
     }
 
     render() {
@@ -21,7 +27,7 @@ class CreateCard extends React.Component {
         }
         return (
             <div {...mainDivProps}>
-                {this.state.active ? <SearchBar/> : ''}
+                {this.state.active ? <SearchBar onSubmit={this.handleLocation}/> : ''}
             </div>
         );
     }

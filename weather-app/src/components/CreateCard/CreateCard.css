@@ -1,0 +1,8 @@
+.create-card {
+    display: inline-block;
+    min-height: 200px;
+    width: 200px;
+    margin: 2.5px;
+    background: rgba(32,32,32, 0.7);
+    vertical-align: top;   
+}

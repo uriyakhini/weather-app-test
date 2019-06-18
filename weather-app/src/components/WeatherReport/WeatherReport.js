@@ -2,10 +2,12 @@ import React from 'react';
 
 import getCurrentWeather from '../../api/weatherAPI';
 import WeatherCard from '../WeatherCard';
+import CreateCard from '../CreateCard';
 
 class WeatherReport extends React.Component {
     constructor(){
         super();
+        this.addCard = this.addCard.bind(this);
         this.state = {
             cards: []
         }
@@ -27,8 +29,9 @@ class WeatherReport extends React.Component {
         return (
             <div className='weather-report'>
                 {this.state.cards.map(card => {
-                    return <WeatherCard data={card.data} location={card.location}/>
+                    return <WeatherCard key={card.location} {...card}/>
                 })}
+                <CreateCard onSubmit={this.addCard}/>
             </div>
         );
     }

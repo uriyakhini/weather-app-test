@@ -3,10 +3,6 @@ import './App.css';
 import WeatherReport from '../WeatherReport';
 
 class App extends React.Component {
-  constructor() {
-    super();
-  }
-
   render () {  
     return (
       <div className="app">
