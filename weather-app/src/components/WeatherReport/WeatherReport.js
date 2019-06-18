@@ -1,37 +1,37 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import getCurrentWeather from '../../api/weatherAPI';
 import WeatherCard from '../WeatherCard';
+import CreateCard from '../CreateCard';
 
 class WeatherReport extends React.Component {
-    static propTypes = {
-        location: PropTypes.string
-    }
-
     constructor(){
         super();
+        this.addCard = this.addCard.bind(this);
         this.state = {
-            data: ''
+            cards: []
         }
     }
 
-    async componentDidMount() {
-        var res = await getCurrentWeather(this.props.location);
-        this.setState({data: res});
-    }
-
-    async componentWillReceiveProps(nextProps){
-        if (this.props.location !== nextProps.location) {
-            var res = await getCurrentWeather(nextProps.location);
-            this.setState({data: res});
+    async addCard(location) {
+        let locationIndex = this.state.cards.map(card => card.location).indexOf(location);
+        if (locationIndex !== -1) {
+            return {err: 'Card already exists!'}
         }
+        
+        var data = await getCurrentWeather(location);
+        let newCards = this.state.cards.slice();
+        newCards.push({location, data});
+        this.setState({cards: newCards});
     }
 
     render() {
         return (
             <div className='weather-report'>
-                {this.state.data ? <WeatherCard data={this.state.data}
-                                                location={this.props.location}/> : ''}
+                {this.state.cards.map(card => {
+                    return <WeatherCard key={card.location} {...card}/>
+                })}
+                <CreateCard onSubmit={this.addCard}/>
             </div>
         );
     }

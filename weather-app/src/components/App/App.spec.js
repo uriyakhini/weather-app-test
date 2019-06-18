@@ -13,7 +13,7 @@ describe('App', () => {
     );
   });
 
-  it('renders weather report', () => {
-    expect(wrapper.find('.weather-report').length).to.eq(1);
+  it('renders app', () => {
+    expect(wrapper.find('.app').length).to.eq(1);
   });
 });

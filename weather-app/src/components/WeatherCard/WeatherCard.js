@@ -17,9 +17,11 @@ class WeatherCard extends React.Component {
     }
 
     render() {
+        let tag = this.props.location;
+        tag = tag.replace(',', ', ');
         return (
             <div className='weather-card'>
-                {this.props.location}
+                <div className='tag'>{tag}</div>
                 <ul>
                     <li>Temperture: {this.props.data.main.temp}</li>
                     <li>Humidity: {this.props.data.main.humidity}</li>
