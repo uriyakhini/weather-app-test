@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Forecast.css';
 import WeatherCard from '../WeatherCard';
 
-const INDEX_TO_DAY = ['Sunday','Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const INDEX_TO_DAY = ['Sun','Mon','Tue', 'Wed', 'Thu', 'Fri', 'Sat ']
 
 class Forecast extends React.Component {
     static propTypes = {
@@ -22,8 +22,10 @@ class Forecast extends React.Component {
     formatTag(unixDate) {
         let date = new Date(unixDate * 1000);
         let today = new Date().getDay();
-        let formattedDate = + date.getDate() + '/' + date.getMonth();
+        let formattedDate = `${date.getDate()}/${date.getMonth() + 1}`;
         let weekday = INDEX_TO_DAY[date.getDay()]
+
+        console.log();
 
         if (date.getDay() === today) {
             weekday = 'Today';
@@ -49,6 +51,7 @@ class Forecast extends React.Component {
                 }
             }
             else {
+                console.log(forecast.dt_txt);
                 dayForecasts.push({tag, data: forecast});
             }
         })
@@ -58,6 +61,7 @@ class Forecast extends React.Component {
 
     componentDidMount() {
         this.parseData(this.props.data);
+        this.props.setWidth(this.state.cards.length * 120);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -67,7 +71,7 @@ class Forecast extends React.Component {
     render() {
         return (
             <div className='forecast-root'>
-                <div className='forecast-tag'>{this.props.tag}</div>
+                <div className='forecast-tag'>{this.props.tag.replace(',', ', ')}</div>
                 <div className='forecast'>
                     {this.state.cards.map((card) => {
                         return <WeatherCard key={card.tag.split(' ')[0]} {...card}/>;

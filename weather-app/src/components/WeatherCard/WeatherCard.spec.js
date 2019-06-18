@@ -36,6 +36,6 @@ describe('WeatherCard', () => {
   })
 
   it('renders weather data', () => {
-    expect(wrapper.find('.weather-card').text()).to.contain('Temperture: 32');
+    expect(wrapper.find('.weather-card').text()).to.contain('32C');
   });
 });
