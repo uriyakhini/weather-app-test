@@ -1,8 +1,9 @@
 .forecast-root {
-    margin-top: 30px;
+    margin-top: 13px;
 }
 
 .forecast-tag {
     font-size: 20px;
+    margin-bottom: 15px;
     color: #ddd;
 }

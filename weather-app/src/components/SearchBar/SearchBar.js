@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import API_KEYS from '../../api-keys.conf';
 
+import './SearchBar.css';
+
 const PLACES_API_URL = `https://maps.googleapis.com/maps/api/js?key=${API_KEYS.google}&libraries=places`;
 
 class SearchBar extends React.Component {
@@ -51,7 +53,7 @@ class SearchBar extends React.Component {
         return (
             <div>
                 <Script url={PLACES_API_URL} onLoad={this.handleLoad}/>
-                <input id={this.props.id} placeholder='location'/>
+                <input id={this.props.id} placeholder='Enter City...'/>
             </div>
         );
     }

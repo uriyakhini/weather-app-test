@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSun, faCloudShowersHeavy, faCloud, faCloudSun, faBolt,
-        faSnowflake, faSmog, faWind} from '@fortawesome/free-solid-svg-icons'
+        faSnowflake, faSmog, faWind, faCloudMoon, faMoon} from '@fortawesome/free-solid-svg-icons'
 import './WeatherCard.css';
 
 
@@ -12,7 +12,7 @@ class WeatherCard extends React.Component {
         data: PropTypes.object
     }
 
-    static WEATHER_CONDITION_TO_ICON = {
+    static WEATHER_CONDITION_TO_ICON_DAY = {
         'Rain': faCloudShowersHeavy,
         'Clouds': {'few clouds': faCloudSun,
                    'scattered clouds': faCloudSun,
@@ -31,11 +31,41 @@ class WeatherCard extends React.Component {
         'Squall': faWind,
         'Tornado': faWind,
     }
+
+    static WEATHER_CONDITION_TO_ICON_NIGHT = {
+        'Rain': faCloudShowersHeavy,
+        'Clouds': {'few clouds': faCloudMoon,
+                   'scattered clouds': faCloudMoon,
+                   'broken clouds': faCloudMoon,
+                   'overcast clouds': faCloud},
+        'Thunderstorm': faBolt,
+        'Clear': faMoon,
+        'Snow': faSnowflake,
+        'Mist': faSmog,
+        'Smoke': faSmog,
+        'Haze': faSmog,
+        'Dust': faSmog,
+        'Fog': faSmog,
+        'Sand': faSmog,
+        'Ash': faSmog,
+        'Squall': faWind,
+        'Tornado': faWind,
+    }
     
 
-    getWeatherIcon() {
+    getWeatherIcon(mode) {
+        if (typeof(mode) === 'undefined') mode = 'day';
+
+        let conditionToIcon;
+        if (mode === 'night') {
+            conditionToIcon = WeatherCard.WEATHER_CONDITION_TO_ICON_NIGHT;
+        }
+        else {
+            conditionToIcon = WeatherCard.WEATHER_CONDITION_TO_ICON_DAY;
+        }
+
         let condition = this.props.data.weather[0];
-        let icon = this.WEATHER_CONDITION_TO_ICON[condition.main];
+        let icon = conditionToIcon[condition.main];
         if (condition.main === 'Clouds') {
             return icon[condition.description];
         }

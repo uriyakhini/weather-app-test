@@ -19,13 +19,13 @@ class Forecast extends React.Component {
         };     
     }
 
+
+
     formatTag(unixDate) {
         let date = new Date(unixDate * 1000);
         let today = new Date().getDay();
         let formattedDate = `${date.getDate()}/${date.getMonth() + 1}`;
         let weekday = INDEX_TO_DAY[date.getDay()]
-
-        console.log();
 
         if (date.getDay() === today) {
             weekday = 'Today';
@@ -51,7 +51,6 @@ class Forecast extends React.Component {
                 }
             }
             else {
-                console.log(forecast.dt_txt);
                 dayForecasts.push({tag, data: forecast});
             }
         })
@@ -61,7 +60,6 @@ class Forecast extends React.Component {
 
     componentDidMount() {
         this.parseData(this.props.data);
-        this.props.setWidth(this.state.cards.length * 120);
     }
 
     componentWillReceiveProps(nextProps) {
