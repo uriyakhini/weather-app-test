@@ -2,7 +2,7 @@ import axios from 'axios'
 import moxios from 'moxios'
 import {expect} from 'chai'
 
-import getCurrentWeather from './weatherAPI'
+import getWeather from './weatherAPI'
 
 describe('WeatherReport', () => {
   it('Skips weather query if another exists in cache', async function () {
@@ -26,7 +26,7 @@ describe('WeatherReport', () => {
         "cod":200}
       });
     });
-    await getCurrentWeather('Cairns');
+    await getWeather('Cairns');
 
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
@@ -48,7 +48,7 @@ describe('WeatherReport', () => {
         }
       });
     });
-    let res = await getCurrentWeather('Cairns');
+    let res = await getWeather('Cairns');
     expect(res.name).to.eq('Cairns');
 
     moxios.uninstall();
