@@ -21,17 +21,19 @@ class WeatherReport extends React.Component {
         
         var data = await getWeather(location);
         let newCards = this.state.cards.slice();
-        newCards.push({location, data});
+        newCards.push({tag: location.replace(',', ', '), data});
         this.setState({cards: newCards});
     }
 
     render() {
         return (
             <div className='weather-report'>
-                {this.state.cards.map(card => {
-                    return <WeatherCard key={card.location} {...card}/>
-                })}
-                <CreateCard onSubmit={this.addCard}/>
+                <div>
+                    {this.state.cards.map(card => {
+                        return <WeatherCard key={card.tag} {...card}/>
+                    })}
+                    <CreateCard onSubmit={this.addCard}/>
+                </div>
             </div>
         );
     }

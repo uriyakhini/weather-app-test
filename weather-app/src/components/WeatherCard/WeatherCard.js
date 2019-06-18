@@ -5,25 +5,23 @@ import './WeatherCard.css';
 
 class WeatherCard extends React.Component {
     static propTypes = {
-        location: PropTypes.string,
+        tag: PropTypes.string,
         data: PropTypes.object
     }
 
     shouldComponentUpdate(nextProps) {
-        if (nextProps.location === this.props.location){
+        if (nextProps.tag === this.props.tag){
             return false;
         }
         return true;
     }
 
     render() {
-        let tag = this.props.location;
-        tag = tag.replace(',', ', ');
         return (
             <div className='weather-card'>
-                <div className='tag'>{tag}</div>
+                <div className='tag'>{this.props.tag}</div>
                 <ul>
-                    <li>Temperture: {this.props.data.main.temp}</li>
+                    <li>Temperture: {this.props.data.main.temp |0}</li>
                     <li>Humidity: {this.props.data.main.humidity}</li>
                     <li>Condition: {this.props.data.weather[0].main}</li>
                 </ul>

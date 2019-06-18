@@ -6,6 +6,7 @@ import moxios from 'moxios';
 import axios from 'axios';
 
 import WeatherReport from './WeatherReport';
+import WeatherCard from '../WeatherCard';
 
 const FAKE_DATA = {"coord":
   {"lon":145.77,"lat":-16.92},
@@ -62,7 +63,7 @@ describe('WeatherReport', () => {
     
     await wrapper.instance().addCard('Cairo');
     wrapper.update();
-    expect(wrapper.children().children().length).to.eq(2);
+    expect(wrapper.find(WeatherCard).length).to.eq(2);
     moxios.uninstall();
   });
 });
