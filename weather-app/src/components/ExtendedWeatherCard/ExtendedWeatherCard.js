@@ -5,7 +5,6 @@ import {faLongArrowAltUp} from '@fortawesome/free-solid-svg-icons'
 import './ExtendedWeatherCard.css';
 
 import WeatherCard from '../WeatherCard';
-import { transform } from '@babel/core';
 
 
 class ExtendedWeatherCard extends WeatherCard {

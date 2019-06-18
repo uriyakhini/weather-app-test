@@ -76,7 +76,6 @@ module.exports = function(config) {
         modules: [__dirname, 'node_modules']
       }
     },
-    node: {fs: 'empty'},
 
     webpackMiddleware: {
       // only output webpack error messages

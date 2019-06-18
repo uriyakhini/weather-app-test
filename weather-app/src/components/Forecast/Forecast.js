@@ -19,8 +19,6 @@ class Forecast extends React.Component {
         };     
     }
 
-
-
     formatTag(unixDate) {
         let date = new Date(unixDate * 1000);
         let today = new Date().getDay();
