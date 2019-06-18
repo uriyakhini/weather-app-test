@@ -66,10 +66,13 @@ class Forecast extends React.Component {
 
     render() {
         return (
-            <div className='forecast'>
-                {this.state.cards.map((card) => {
-                    return <WeatherCard key={card.tag.split(' ')[0]} {...card}/>;
-                })}
+            <div className='forecast-root'>
+                <div className='forecast-tag'>{this.props.tag}</div>
+                <div className='forecast'>
+                    {this.state.cards.map((card) => {
+                        return <WeatherCard key={card.tag.split(' ')[0]} {...card}/>;
+                    })}
+                </div>
             </div>
         );
     }

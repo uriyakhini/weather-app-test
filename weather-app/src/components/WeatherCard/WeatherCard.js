@@ -9,13 +9,6 @@ class WeatherCard extends React.Component {
         data: PropTypes.object
     }
 
-    shouldComponentUpdate(nextProps) {
-        if (nextProps.tag === this.props.tag){
-            return false;
-        }
-        return true;
-    }
-
     render() {
         return (
             <div className='weather-card'>
