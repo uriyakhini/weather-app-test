@@ -27,7 +27,7 @@ class SearchBar extends React.Component {
 
         // Add country code for weathermap api. If none is provided, only the city name is used.
         if (location.length >= 3){
-            parsedLocation += `,${location[2].short_name}`
+            parsedLocation += `,${location[location.length - 1].short_name}`
         }
     
         return parsedLocation;
